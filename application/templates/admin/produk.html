@@ -1,0 +1,36 @@
+
+{% block content %}
+<div class="container">
+    <div class="starter-template">
+        <h1>tampilan dari Database</h1>
+        <h1>paket pembuatan website aplication</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>No</td>
+                    <td>nama paekt</td>
+                    <td>deskripsi</td>
+                    <td>harga mulai dari</td>
+                    <td>aksi</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in mobil %}
+                <tr>
+                    <td>{{ row.0 }}</td>
+                    <td>{{ row.1 }}</td>
+                    <td>{{ row.2 }}</td>
+                    <td>{{ row.3 }}</td>
+                    <td><button onclick="alert('pilihan sukses!')">edit</button><button onclick="alert('pilihan sukses!')">delete</button></td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="2">Unbelievable. No entries here so far</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- /.container -->
+{% endblock %}

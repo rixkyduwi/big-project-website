@@ -1,0 +1,37 @@
+
+{% block content %}
+<div class="container">
+    <div class="starter-template">
+        <h1>tampilan dari Database</h1>
+        <h1>Data Akumulasi Pembuangan Sampah Per rumah</h1>
+        <h2>Di Perumahan Palm Asri</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>No</td>
+                    <td>nama</td>
+                    <td>nomor rumah</td>
+                    <td>kontak </td>
+                    <td>pilih</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data_warga %} 
+                <tr>
+                    <td>{{ row.0 }}</td>
+                    <td>{{ row.1 }}</td>
+                    <td>{{ row.2 }}</td>
+                    <td>{{ row.3 }}</td>
+                    <td><button onclick="alert('pilihan sukses!')">pilih</button></td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="2">Unbelievable. No entries here so far</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- /.container -->
+{% endblock %}
