@@ -20,13 +20,6 @@ def admin():
     tabel = kabel.fetchall()
     kabel.close()
     return render_template('login.html', admin=tabel)
-@app.route('/admin')
-def admin():
-    kabel = mysql.connection.cursor()
-    kabel.execute("SELECT * FROM mobil")
-    tabel = kabel.fetchall()
-    kabel.close()
-    return render_template('admin/index.html', admin=tabel)
 @app.route('/warga')
 def admin():
     warga = mysql.connection.cursor()
