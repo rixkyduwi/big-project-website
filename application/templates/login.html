@@ -1,29 +1,28 @@
-{% extends "layout.html"%}
-{% block content %}
-<div class="col-lg-8 col-md-6 col-sm-12">
-    <div class="contact-form">
-        <form id="contact" action="send.js" method="get">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 col-sm-12">
-                    <fieldset>
-                        <input name="name" type="text" class="form-control" id="name"
-                            placeholder="username" required="">
-                    </fieldset>
-                </div>
-                <div class="col-lg-6 col-md-12 col-sm-12">
-                    <fieldset>
-                        <input name="pswd" type="password" class="form-control" id="email"
-                            placeholder="password" required="">
-                    </fieldset>
-                </div>
-                <div class="col-lg-12">
-                    <fieldset>
-                        <button type="submit" id="form-submit" onclick="alert('Selamat Datang!')"
-                            class="main-button">Send</button>
-                    </fieldset>
-                </div>
-            </div>
-        </form>
+<body style="background-image: url(../static/images/banner-bg.png);">
+    <div style="background-color: whitesmoke; margin: 100px;padding: 20px; border-radius: 8px;">
+    <h1 style="position: relative;">{{ title }}</h1>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h3></h3>
+            <form name="login" action="" method="POST">
+                {{  form.hidden_tag()  }}
+                <p>
+                {{ form.email.label }}<br>
+                {{ form.email(size=50)}}
+                </p>
+                <p> 
+                {{  form.password.label  }}<br>
+                {{  form.password(size=10)  }}
+                </p>
+                <p>
+                {{  form.remember_me }} 
+                {{  form.remember_me.label }}
+                <p>
+                {{  form.submit }}
+                </p>
+            </form>
+        </div>
     </div>
-</div>
-{% endblock %}
+    </div>
+    </body>
+       
