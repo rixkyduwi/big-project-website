@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <link rel="stylesheet" href="header/style.css">
+    <link rel="stylesheet" href="../../static/css/header.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +25,7 @@
     
         .card__image-container {
             width: 100%;
-            padding-top: 100%;
+            padding-top: 65%;
             overflow: hidden;
             position: relative;
             border-radius: 15px 15px 0px 0px;
@@ -40,66 +40,69 @@
     </head>
     
     <body>
+        {% include 'admin/nav.html' %}
         <main class="main-admin" style="margin-top:-2em">
             <section class="cards" id="exp">
+                <form name="pilih" action="" method="POST">
                 <div class="card">
                     <div class="card__image-container">
-                        <a href="bio_kemadu.php">
-                            <img src="../../user/images/sindangkemadu.jpg"
+                        <a href="organik.html">
+                            <img src="../../static/images/blog-item-01.png"
                                 alt="Detailed image description would go here." /></a>
                     </div>
                     <div class="card__content d-flex" style="justify-content: space-between;align-items: center">
                         <p class="card__title text--medium">
-                            Sindang Kemadu
+                            akumulasi Sampah organik
                         </p>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card__image-container">
-                        <a href="bio_cempaka.php">
-                            <img src="../../user/images/cempaka.jpg" alt="Detailed image description would go here." /></a>
+                        <a href="Anorganik.html">
+                            <img src="../../static/images/blog-item-01.png" alt="Detailed image description would go here." /></a>
                     </div>
                     <div class="card__content d-flex" style="justify-content: space-between;align-items: center">
                         <p class="card__title text--medium">
-                            Desa Cempaka
+                            akumulasi sampah anorganik
                         </p>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card__image-container">
-                        <a href="bio_guci.php">
-                            <img src="../../user/images/guci.jpg" alt="Detailed image description would go here." />
+                        <a href="b3.html">
+                            <img src="../../static/images/blog-item-01.png" alt="Detailed image description would go here." />
                         </a>
                     </div>
                     <div class="card__content d-flex" style="justify-content: space-between;align-items: center">
                         <p class="card__title text--medium">
-                            Guci
+                            akumulasi sampah b3
                         </p>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card__image-container">
-                        <a href="bio_sigedong.php">
-                            <img src="../../user/images/sigedong.jpg" alt="Detailed image description would go here." />
+                        <a href="Data_warga.html">
+                            <img src="../../static/images/blog-item-01.png" alt="Detailed image description would go here." />
                         </a>
                     </div>
                     <div class="card__content d-flex" style="justify-content: space-between;align-items: center">
                         <p class="card__title text--medium">
-                            Sigedong
+                            Data Warga
                         </p>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card__image-container">
-                        <a href="bio_sawahbatu.php">
-                            <img src="../../user/images/sawahbatu.jpg" alt="Detailed image description would go here." />
+                        <a href="latih_mesin.html">
+                            <img src="../../static/images/blog-item-01.png" alt="Detailed image description would go here." />
                         </a>
                     </div>
                     <div class="card__content d-flex" style="justify-content: space-between;align-items: center">
                         <p class="card__title text--medium">
-                            Sawah Batu
+                            Latih Mesin
                         </p>
                     </div>
                 </div>
+                </form>
             </section>
         </main>

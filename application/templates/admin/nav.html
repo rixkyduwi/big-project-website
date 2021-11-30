@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <link rel="stylesheet" href="../../static/css/header.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    .link_name {
+        font-size: 14px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar close">
+        <div class="logo-details">
+            <i style="cursor:pointer;" class='bx bx-menu'></i>
+            <span class="logo_name" style="font-size:14px">admin</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="index.html">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="link_name" style="font-size:16px;">Dashboard</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="index.html">Dashboard</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-collection'></i>
+                        <span class="link_name" style="font-size:16px;">Anorganik</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">akumulasi sampah</a></li>
+                    <li><a href="Anorganik.html">anorganik</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-collection'></i>
+                        <span class="link_name" style="font-size:16px;">organik</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">akumulasi sampah</a></li>
+                    <li><a href="organik.html">organik</a>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-collection'></i>
+                        <span class="link_name" style="font-size:16px;">program</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">akumulasi sampah</a></li>
+                    <li><a href="b3.html">b3(Bahan Berbahaya dan Beracun)</a>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-collection'></i>
+                        <span class="link_name" style="font-size:16px;">Data Warga</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Data Warga</a></li>
+                    <li><a href="Data_warga.html">Data Warga</a>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-collection'></i>
+                        <span class="link_name" style="font-size:16px;">Latih Mesin</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Latih Mesin</a></li>
+                    <li><a href="latih_mesin.html">deteksi sampah</a>
+                    <li><a href="latih_mesin.html">chatbot</a>
+                </ul>
+            </li>
+            <li>
+                <a href="user.ph">
+                    <i class='bx bx-user-circle'></i>
+                    <span class="link_name" style="font-size:16px;">Daftar Admin</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="user.php" style="font-size:16px;">Daftar Admin</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="../login.html">
+                    <i class='bx bx-exit'></i>
+                    <span class="link_name">Logout</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="../login.html">Logout</a></li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+    <!--section class="home-section">
+        <div class="home-content">
+            <i class='bx bx-menu'></i>
+        </div>
+    </section-->
+
+    <script>
+    let arrow = document.querySelectorAll(".arrow");
+    for (var i = 0; i < arrow.length; i++) {
+        arrow[i].addEventListener("click", (e) => {
+            let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
+            arrowParent.classList.toggle("showMenu");
+        });
+    }
+
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".bx-menu");
+    console.log(sidebarBtn);
+    sidebarBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+    });
+    </script>
+
+</body>
+
+</html>

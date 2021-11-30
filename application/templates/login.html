@@ -7,8 +7,8 @@
             <form name="login" action="" method="POST">
                 {{  form.hidden_tag()  }}
                 <p>
-                {{ form.email.label }}<br>
-                {{ form.email(size=50)}}
+                {{ form.username.label }}<br>
+                {{ form.username(size=50)}}
                 </p>
                 <p> 
                 {{  form.password.label  }}<br>
@@ -20,7 +20,9 @@
                 <p>
                 {{  form.submit }}
                 </p>
+                
             </form>
+            <p>{{ a }}</p>
         </div>
     </div>
     </div>

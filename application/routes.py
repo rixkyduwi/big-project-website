@@ -19,13 +19,20 @@ def login():
     form =LoginForm()
     if request.method == "POST":
         details = request.form
+        passs=details['password']
         cur = mysql.connection.cursor()
-        cur.execute("SELECT username FROM admin")
-        nama = cur.fetchall() 
-        cur.execute("SELECT password FROM admin")
-        pswd = cur.fetchall()
-        cur.close()
-        return 
+        cur.execute("SELECT username FROM admin") 
+        if (details['username']== cur.fetchall() ):
+            cur.execute("SELECT username FROM admin") 
+            if (passs == cur.fetchall() ):
+                cur.close()
+                return redirect('/login/admin')
+
+            else:
+                cur.close()
+                return render_template("login.html",a="password salah", title="Login",form =form, login=True)
+        else:
+            return render_template("login.html", a="user/pswd salah",title="Login",form =form, login=True)
     return render_template("login.html", title="Login",form =form, login=True)
 @app.route('/warga')
 def warga():
@@ -40,4 +47,5 @@ def admin():
     kabel.execute("SELECT * FROM qna")
     tabel = kabel.fetchall()
     kabel.close()
-    return render_template('/admin/index.html', admin=tabel)
+    
+    return render_template('admin/index.html', admin=tabel)
