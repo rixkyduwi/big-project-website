@@ -40,12 +40,11 @@ def warga():
     warga.execute("SELECT * FROM data_warga")
     data_warga = warga.fetchall()
     warga.close()
-    return render_template('warga.html', data_warga=data_warga)
+    return render_template('admin/warga.html', data_warga=data_warga)
 @app.route('/login/admin')
 def admin():
     kabel = mysql.connection.cursor()
     kabel.execute("SELECT * FROM qna")
     tabel = kabel.fetchall()
     kabel.close()
-    
     return render_template('admin/index.html', admin=tabel)
