@@ -22,17 +22,17 @@
         </div>
         <ul class="nav-links">
             <li>
-                <a href="index.html">
+                <a href="{{url_for('admin')}}">
                     <i class='bx bx-grid-alt'></i>
                     <span class="link_name" style="font-size:16px;">Dashboard</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="index.html">Dashboard</a></li>
+                    <li><a class="link_name" href="{{url_for('admin')}}">Dashboard</a></li>
                 </ul>
             </li>
             <li>
                 <div class="iocn-link">
-                    <a href="#">
+                    <a href="{{url_for('anorganik')}}">
                         <i class='bx bx-collection'></i>
                         <span class="link_name" style="font-size:16px;">Anorganik</span>
                     </a>
@@ -40,12 +40,12 @@
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">akumulasi sampah</a></li>
-                    <li><a href="Anorganik.html">anorganik</a></li>
+                    <li><a href="{{url_for('anorganik')}}">anorganik</a></li>
                 </ul>
             </li>
             <li>
                 <div class="iocn-link">
-                    <a href="#">
+                    <a href="{{url_for('organik')}}">
                         <i class='bx bx-collection'></i>
                         <span class="link_name" style="font-size:16px;">organik</span>
                     </a>
@@ -53,7 +53,7 @@
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">akumulasi sampah</a></li>
-                    <li><a href="organik.html">organik</a>
+                    <li><a href="{{url_for('organik')}}">organik</a>
                 </ul>
             </li>
             <li>
@@ -66,7 +66,7 @@
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">akumulasi sampah</a></li>
-                    <li><a href="b3.html">b3(Bahan Berbahaya dan Beracun)</a>
+                    <li><a href="{{url_for('b3')}}">b3(Bahan Berbahaya dan Beracun)</a>
                 </ul>
             </li>
             <li>
@@ -79,7 +79,7 @@
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">Data Warga</a></li>
-                    <li><a href="Data_warga.html">Data Warga</a>
+                    <li><a href="{{url_for('warga')}}">Data Warga</a>
                 </ul>
             </li>
             <li>
@@ -92,26 +92,26 @@
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">Latih Mesin</a></li>
-                    <li><a href="latih_mesin.html">deteksi sampah</a>
-                    <li><a href="latih_mesin.html">chatbot</a>
+                    <li><a href="{{url_for('latih_mesin')}}">deteksi sampah</a>
+                    <li><a href="{{url_for('latih_mesin')}}">chatbot</a>
                 </ul>
             </li>
             <li>
-                <a href="user.ph">
+                <a href="{{url_for('listadmin')}}">
                     <i class='bx bx-user-circle'></i>
                     <span class="link_name" style="font-size:16px;">Daftar Admin</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="user.php" style="font-size:16px;">Daftar Admin</a></li>
+                    <li><a class="link_name" href="{{url_for('listadmin')}}" style="font-size:16px;">Daftar Admin</a></li>
                 </ul>
             </li>
             <li>
-                <a href="../login.html">
+                <a href="{{url_for('login')}}">
                     <i class='bx bx-exit'></i>
                     <span class="link_name">Logout</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="../login.html">Logout</a></li>
+                    <li><a class="link_name" href="{{url_for('login')}}">Logout</a></li>
                 </ul>
             </li>
 
