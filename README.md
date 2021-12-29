@@ -12,4 +12,6 @@ kemudian install semua library yang dibutuhkan <br>
 ketik <code>pip install flask flask_login flask_sqlalchemy flask_mysqldb </code> <br>
 untuk library model chatbot <br>
 ketik <code>pip install nltk pickle tensorflow numpy</code><br>
+setelah semua sudah terinstal untuk menjalankanya <br>
+ketik <code>python main.py</code><br>
 --selesai--
