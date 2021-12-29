@@ -1,35 +1,42 @@
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
-
+from flask_mysqldb import MySQL 
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
+mysql = MySQL()
+UPLOAD_FOLDER = 'application/static/upload/'
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret-key-goes-here'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'big_project'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+app.config.update(dict(
+SECRET_KEY="powerful secretkey",
+WTF_CSRF_SECRET_KEY="a csrf secret key"
+    ))
+mysql.init_app(app)
+db.init_app(app)
 
-def create_app():
-    
-    app = Flask(__name__)
+login_manager = LoginManager()
+login_manager.login_view = 'auth.login'
+login_manager.init_app(app)
 
-    app.config['SECRET_KEY'] = 'secret-key-goes-here'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+from application.models import User
 
-    db.init_app(app)
-
-    login_manager = LoginManager()
-    login_manager.login_view = 'auth.login'
-    login_manager.init_app(app)
-
-    from .models import User
-
-    @login_manager.user_loader
-    def load_user(user_id):
+@login_manager.user_loader
+def load_user(user_id):
         # since the user_id is just the primary key of our user table, use it in the query for the user
         return User.query.get(int(user_id))
     # blueprint for auth routes in our app
-    from .auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint)
+from application.auth import auth as auth_blueprint
+app.register_blueprint(auth_blueprint)
 
-    # blueprint for non-auth parts of app
-    from .main import main as main_blueprint
-    app.register_blueprint(main_blueprint)
+# blueprint for non-auth parts of app
+from application.main import main as main_blueprint
+app.register_blueprint(main_blueprint)
 
-    return app

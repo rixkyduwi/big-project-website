@@ -1,12 +1,3 @@
-from flask import Blueprint
-from . import db
-
-main = Blueprint('main', __name__)
-
-@main.route('/')
-def index():
-    return 'Index'
-
-@main.route('/profile')
-def profile():
-    return 'Profile'
+from application import app
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", port=5000, debug=True)

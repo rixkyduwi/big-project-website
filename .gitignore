@@ -1,0 +1,5 @@
+auth/
+__pycache__/
+cv_api/
+web/
+project/

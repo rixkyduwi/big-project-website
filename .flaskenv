@@ -1,3 +1,3 @@
-FLASK_ENV=development
-FLASK_APP=application 
-FLASK_DEBUG=1
+FLASK_APP=main.py
+FLASK_HOST="0.0.0.0"
+FLASK_PORT=5000

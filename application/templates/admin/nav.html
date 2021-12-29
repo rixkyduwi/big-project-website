@@ -11,6 +11,21 @@
     .link_name {
         font-size: 14px;
     }
+    table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+    td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    }
+
+    tr:nth-child(even) {
+    background-color: #dddddd;
+    }
     </style>
 </head>
 
@@ -24,12 +39,12 @@
         </div>
         <ul class="nav-links">
             <li>
-                <a href="{{url_for('main.profile')}}">
+                <a href="{{url_for('main.dashboard')}}">
                     <i class='bx bx-grid-alt'></i>
                     <span class="link_name" style="font-size:16px;">Dashboard</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="{{url_for('main.profile')}}">Dashboard</a></li>
+                    <li><a class="link_name" href="{{url_for('main.dashboard')}}">Dashboard</a></li>
                 </ul>
             </li>
             <li>
@@ -94,17 +109,26 @@
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">Latih Mesin</a></li>
-                    <li><a href="https://colab.research.google.com/drive/1gTbdLgHWjsRqB3JFTDou8bs5_PV3Tctc?usp=sharing">deteksi sampah</a>
-                    <li><a href="https://colab.research.google.com/drive/1755xuQbyPK3yreKlczREACN5nImNP_LP?usp=sharing">chatbot</a>
+                    <li><a href="https://drive.google.com/drive/folders/1cdZiSSnoWV4FbJHEhqTE_fId1kNU6U_s?usp=sharing">deteksi sampah</a>
+                    <li><a href="{{url_for ('main.latih_chatbot')}}">ubah respon chatbot</a>
                 </ul>
             </li>
             <li>
-                <a href="{{url_for('main.listadmin')}}">
+                <a href="{{url_for('main.chatbot')}}">
+                    <i class='bx bx-user-circle'></i>
+                    <span class="link_name" style="font-size:16px;">Lihat Chatbot</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="{{url_for('main.chatbot')}}" style="font-size:16px;">chatbot</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="{{url_for('auth.signup')}}">
                     <i class='bx bx-user-circle'></i>
                     <span class="link_name" style="font-size:16px;">Daftar Admin</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="{{url_for('main.listadmin')}}" style="font-size:16px;">Daftar Admin</a></li>
+                    <li><a class="link_name" href="{{url_for('auth.signup')}}" style="font-size:16px;">Daftar Admin</a></li>
                 </ul>
             </li>
             <li>
