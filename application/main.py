@@ -10,9 +10,10 @@ import nltk,pickle,json,random;nltk.download('popular')
 from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 import numpy as np
+from json_modify import apply_actions
 from keras.models import load_model
 model = load_model('model.h5')
-intents = json.loads(open('application/data.json').read())
+intents = json.loads(open('application/content.json').read())
 words = pickle.  load(open('texts.pkl','rb'))
 classes = pickle.load(open('labels.pkl','rb'))
 #upload gambar
@@ -90,6 +91,7 @@ def warga():
             }]
 
         else:
+            print('%s')
             query = "DELETE FROM data_warga where id = %s"
             id_ = request.args.get("id")
             values = (id_,)
@@ -100,6 +102,48 @@ def warga():
     except Exception as e:
         return make_response(jsonify({'error':str(e)}),400)
     return make_response(jsonify({'data':data}),200)
+@main.route('/deleteuser/<id>')
+def deleteuser(id):
+    try:
+        dt = Data()
+        values = ()
+        if request.method == 'GET':
+            warga = mysql.connection.cursor()
+            warga.execute("DELETE FROM data_warga where id = "+id)
+            mysql.connection.commit()
+            data_warga = warga.fetchall()
+    except Exception as e:
+        print(id)
+        return render_template('admin/data_warga.html')
+    return redirect(url_for('main.warga'))
+@main.route('/formupdate/<id>', methods=['GET'])
+def formupdate(id):
+    warga = mysql.connection.cursor()
+    warga.execute("SELECT * FROM data_warga where id ="+id)
+    data_warga = warga.fetchall()
+    warga.close()
+    print(data_warga)
+    return render_template('admin/edit_warga.html',data_warga=data_warga)
+@main.route('/updateuser/<id>',methods=['POST'])
+def updateuser(id):
+    warga = mysql.connection.cursor()
+    nama = request.form['nama']
+    alamat = request.form['alamat']
+    kontak = request.form['kontak']
+    password = request.form['password']
+    email = request.form['email']
+    warga.execute("UPDATE data_warga SET id = "+id+",nama ='"+ nama+"',no_rumah = '" +alamat+"',kontak='"+ kontak+"',password = '"+password+"',email = '"+email+"' WHERE  id ="+id)
+    mysql.connection.commit()
+    data_warga = warga.fetchall()
+    return redirect(url_for('main.warga',data_warga=data_warga))
+@main.route('/atributuser/<jenis>',methods=['POST'])
+def atributuser(jenis):
+    warga = mysql.connection.cursor()
+    user = request.form['user']
+    warga.execute("INSERT INTO uploadgambar (jenis,user) values (%s,%s)",(jenis,user,))
+    mysql.connection.commit()
+    return "halo"
+
 @main.route('/uploadgambar')
 def upload_form():
 	return render_template('upload.html')
@@ -115,7 +159,6 @@ def upload_image():
 	if file and allowed_file(file.filename):
 		filename = secure_filename(file.filename)
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
 		#print('upload_image filename: ' + filename)
 		flash('Image successfully uploaded and displayed below')
 		return render_template('upload.html', filename=filename)
@@ -155,7 +198,15 @@ def b3():
 @main.route('/admin/latih_chatbot')
 @login_required
 def latih_chatbot():
-    return intents
+    filename = 'application/content.json'
+    with open(filename, 'r') as f:
+        data = json.load(f)
+        data['id'] = 134 # <--- add `id` value.
+
+        os.remove(filename)
+    with open(filename, 'w') as f:
+        json.dump(data, f, indent=4)
+    return jsonify(intents)
 @main.route('/admin/listadmin')
 @login_required
 def listadmin():
@@ -247,7 +298,7 @@ def reguser(username):
     mysql.connection.commit()
     return "halo"+str(nama)
 
-@main.route('/uploadgambar/<gambar>', methods=['POST'])
+@main.route('/tambahgambar/<gambar>', methods=['POST'])
 def tambahgambar(gambar):
     warga = mysql.connection.cursor()
     warga.execute("INSERT INTO tambahgambar (gambar) values (%s)",(gambar,))

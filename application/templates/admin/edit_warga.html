@@ -9,35 +9,15 @@
 <body>
     <div class="container">
         <h2>Edit Info</h2>
-        <form method="POST" action="../save_info/save_info_gerbang.php" enctype="multipart/form-data">
-            <!-- menampung nilai id produk yang akan di edit -->
-            <input name="id" value="<?php echo $data['id']; ?>" hidden />
-            <div>
-                <label>Judul</label><br>
-                <input style="margin-top:.5em" class="form-control" type="text" name="judul"
-                    value="<?php echo $data['judul']; ?>" autofocus="" required="" />
-            </div><br>
-            <div>
-                <label style="margin-bottom:.5em">Deskripsi</label>
-                <textarea class="ckeditor" id="deskripsi" style="padding:2em" name="deskripsi" cols="100" rows="5"
-                    required><?php echo $data['deskripsi']; ?></textarea><br>
-            </div><br>
-            <div style="display:flex">
-                <img src="../../images/<?php echo $data['foto']; ?>" style="width: 200px;margin-bottom: 5px;">
-                <div style="margin-left:1em;">
-                    <label>Foto</label><br><br>
-                    <input type="file" name="foto" /><br>
-                    <i style=" margin-left:1em;font-size: 14px;color: red">Abaikan jika tidak merubah gambar</i>
-                </div>
 
-            </div>
-
-            <br>
-            <div>
-                <button class="btn savebtn" type="submit">Simpan Perubahan</button>
-                <a href="../../info_gerbang.php"></a>
-                <button class="backbtn" type="submit">Kembali</button>
-            </div>
+        <form method="POST" action="/updateuser/{{ data_warga[0].0 }}" >
+        <input name='id' value="{{ data_warga[0].0 }}">
+        <input name='nama' value="{{data_warga[0].1}}">
+        <input name='alamat'value="{{data_warga[0].2}}">
+        <input name='kontak'value="{{data_warga[0].3}}">
+        <input name='password'value="{{data_warga[0].4}}">
+        <input name='email'value="{{data_warga[0].5}}">
+        <button type="submit">Simpan Perubahan</button>
         </form>
     </div>
 </body>
