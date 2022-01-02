@@ -19,10 +19,8 @@ def login_post():
         warga = mysql.connection.cursor()
         username = request.form['username']
         password = request.form['password']
-        remember = request.form['remember']
         warga.execute("SELECT email FROM data_warga WHERE email= %s AND password = %s" , (username, password,))
         masuk = warga.fetchall()
-        warga.execute("SELECT nama FROM data_warga WHERE email= %s AND password = %s" , (username, password,))
         user= warga.fetchall()
         return "halo"+str(masuk)
     elif request.method == 'POST':

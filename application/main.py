@@ -88,6 +88,38 @@ def anorganik():
     data_warga = warga.fetchall()
     warga.close()
     return render_template('admin/anorganik.html', akumulasi=data_warga,anorganik=True)
+@main.route('/deleteanorganik/<id>')
+@login_required
+def deleteanorganik(id):
+    try:
+        if request.method == 'GET':
+            warga = mysql.connection.cursor()
+            warga.execute("DELETE FROM akumulasi where id = "+id)
+            mysql.connection.commit()
+    except Exception as e:
+        return make_response(e)
+    return redirect(url_for('main.anorganik'))
+@main.route('/formupdateanorganik/<id>', methods=['GET'])
+@login_required
+def formupdateanorganik(id):
+    akumulasi = mysql.connection.cursor()
+    akumulasi.execute("SELECT * FROM  where id ="+id)
+    akumulasi = akumulasi.fetchall()
+    akumulasi.close()
+    return render_template('admin/edit_akumulasi.html',data_warga=akumulasi)
+@main.route('/updateanorganik/<id>',methods=['POST'])
+@login_required
+def updateanorganik(id):
+    akumulasi = mysql.connection.cursor()
+    nama = request.form['nama']
+    alamat = request.form['alamat']
+    kontak = request.form['kontak']
+    password = request.form['password']
+    email = request.form['email']
+    akumulasi.execute("UPDATE akumulasi SET id = "+id+",nama ='"+ nama+"',no_rumah = '" +alamat+"',kontak='"+ kontak+"',password = '"+password+"',email = '"+email+"' WHERE  id ="+id)
+    mysql.connection.commit()
+    akumulasi = akumulasi.fetchall()
+    return redirect(url_for('main.anorganik',akumulasi=akumulasi))
 @main.route('/admin/organik')
 @login_required
 def organik():
@@ -96,6 +128,17 @@ def organik():
     data_warga = warga.fetchall()
     warga.close()
     return render_template('admin/organik.html', akumulasi=data_warga,organik=True)
+@main.route('/deleteorganik/<id>')
+@login_required
+def deleteorganik(id):
+    try:
+        if request.method == 'GET':
+            warga = mysql.connection.cursor()
+            warga.execute("DELETE FROM akumulasi where id = "+id)
+            mysql.connection.commit()
+    except Exception as e:
+        return make_response(e)
+    return redirect(url_for('main.organik'))
 @main.route('/admin/b3')
 @login_required
 def b3():
@@ -104,6 +147,17 @@ def b3():
     data_warga = warga.fetchall()
     warga.close()
     return render_template('admin/b3.html', akumulasi=data_warga,b3=True)
+@main.route('/deleteb3/<id>')
+@login_required
+def deleteb3(id):
+    try:
+        if request.method == 'GET':
+            warga = mysql.connection.cursor()
+            warga.execute("DELETE FROM akumulasi where id = "+id)
+            mysql.connection.commit()
+    except Exception as e:
+        return make_response(e)
+    return redirect(url_for('main.b3'))
 @main.route('/admin/latih_chatbot',methods=['GET','POST'])
 @login_required
 def latih_chatbot():
