@@ -1,5 +1,5 @@
+{% if not current_user.is_authenticated %}
 {% extends "base.html" %}
-
 {% block content %}
 <div class="column is-4 is-offset-4">
     <h3 class="title">Sign Up</h3>
@@ -36,3 +36,11 @@
 </div>
 
 {% endblock %}
+{% endif %}
+{% if current_user.is_authenticated %}
+untuk signup lagi anda perlu logout<br>
+<a href="{{url_for('auth.logout')}}"><button>Logout</button></a><br>
+atau apabila anda ingin kembali ke dashboard<br>
+<a href="{{url_for('main.dashboard')}}"><button>Dashboard</button></a>
+
+{% endif %}

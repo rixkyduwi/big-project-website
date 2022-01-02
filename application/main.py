@@ -4,7 +4,6 @@ from application import db,app,mysql
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, current_user
 from application.models import User
-from application.CRUD import Data
 #chatbot
 import nltk,pickle,json,random;nltk.download('popular')
 from nltk.stem import WordNetLemmatizer
@@ -32,91 +31,27 @@ def index():
 @login_required
 def dashboard():
     return render_template('admin/index.html', name=current_user.name)
-@main.route('/admin/warga',methods=['GET','POST','PUT','DELETE'])
+@main.route('/admin/warga',methods=['GET'])
+@login_required
 def warga():
-    try:
-        dt = Data()
-        values = ()
-        if request.method == 'GET':
-            warga = mysql.connection.cursor()
-            warga.execute("SELECT * FROM data_warga")
-            data_warga = warga.fetchall()
-            warga.close()
-            return render_template('admin/data_warga.html',data_warga=data_warga)
-
-        elif request.method == 'POST':
-                datainput = request.json
-                nama = datainput['nama']
-                no_rumah = datainput['no_rumah']
-                kontak = datainput['kontak']
-                password = datainput['password']
-                email = datainput['email']
-                query = "INSERT INTO data_warga (nama,no_rumah,kontak,password,email,) values (%s,%s,%s,%s,%s) "
-                values = (nama,no_rumah, kontak,password,email)
-                dt.insert_data(query, values)  
-                data = [{
-                    'pesan': 'berhasil menambah data' 
-                }]
-        
-        elif request.method == 'PUT':
-            query = "UPDATE data_warga SET id = %s"
-            datainput = request.json
-            id_ = datainput['id']
-            values += (id_,)
-            if 'nama' in datainput:
-                nama = datainput['nama']
-                values += (nama, )
-                query += ", nama = %s"
-            if 'no_rumah' in datainput:
-                pekerjaan = datainput['no_rumah']
-                values += (pekerjaan, )
-                query += ", no_rumah = %s"
-            if 'kontak' in datainput:
-                usia = datainput['kontak']
-                values += (usia, )
-                query += ", usia = %s"
-            if 'password' in datainput:
-                usia = datainput['password']
-                values += (usia, )
-                query += ", password = %s"
-            if 'email' in datainput:
-                usia = datainput['email']
-                values += (usia, )
-                query += ", email = %s"
-            query += " where id = %s"
-            values += (id_,)
-            dt.insert_data(query, values)
-            data =[{
-                'pesan' : 'berhasil mengubah data'
-            }]
-
-        else:
-            print('%s')
-            query = "DELETE FROM data_warga where id = %s"
-            id_ = request.args.get("id")
-            values = (id_,)
-            dt.insert_data(query, values)
-            data =[{
-                'pesan': 'berhasil menghapus'
-            }]
-    except Exception as e:
-        return make_response(jsonify({'error':str(e)}),400)
-    return make_response(jsonify({'data':data}),200)
+    warga = mysql.connection.cursor()
+    warga.execute("SELECT * FROM data_warga")
+    data_warga = warga.fetchall()
+    warga.close()
+    return render_template('admin/data_warga.html',data_warga=data_warga)
 @main.route('/deleteuser/<id>')
+@login_required
 def deleteuser(id):
     try:
-        dt = Data()
-        values = ()
         if request.method == 'GET':
             warga = mysql.connection.cursor()
             warga.execute("DELETE FROM data_warga where id = "+id)
             mysql.connection.commit()
-            data_warga = warga.fetchall()
     except Exception as e:
-        print(id)
-        return render_template('admin/data_warga.html')
+        return make_response(e)
     return redirect(url_for('main.warga'))
 @main.route('/formupdate/<id>', methods=['GET'])
+@login_required
 def formupdate(id):
     warga = mysql.connection.cursor()
     warga.execute("SELECT * FROM data_warga where id ="+id)
@@ -125,6 +60,7 @@ def formupdate(id):
     print(data_warga)
     return render_template('admin/edit_warga.html',data_warga=data_warga)
 @main.route('/updateuser/<id>',methods=['POST'])
+@login_required
 def updateuser(id):
     warga = mysql.connection.cursor()
     nama = request.form['nama']
@@ -140,84 +76,59 @@ def updateuser(id):
 def atributuser(jenis):
     warga = mysql.connection.cursor()
     user = request.form['user']
-    warga.execute("INSERT INTO uploadgambar (jenis,user) values (%s,%s)",(jenis,user,))
+    berat = request.form['berat(KG)']
+    warga.execute("INSERT INTO akumulasi (jenis,user,berat_KG) values (%s,%s,%s)",(jenis,user,int(berat),))
     mysql.connection.commit()
-    return "halo"
-
-@main.route('/uploadgambar')
-def upload_form():
-	return render_template('upload.html')
-@main.route('/uploadgambar', methods=['POST'])
-def upload_image():
-	if 'gambar' not in request.files:
-		flash('No file part')
-		return redirect(request.url)
-	file = request.files['gambar']
-	if file.filename == '':
-		flash('No image selected for uploading')
-		return redirect(request.url)
-	if file and allowed_file(file.filename):
-		filename = secure_filename(file.filename)
-		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-		#print('upload_image filename: ' + filename)
-		flash('Image successfully uploaded and displayed below')
-		return render_template('upload.html', filename=filename)
-	else:
-		flash('Allowed image types are -> png, jpg, jpeg, gif')
-		return redirect(request.url)
-
-@main.route('/display/<filename>')
-def display_image(filename):
-	#print('display_image filename: ' + filename)
-	return redirect(url_for('static', filename='upload/' + filename), code=301)
-
+    return "Hasil Scan Telah Disimpan"
 @main.route('/admin/anorganik')
 @login_required
 def anorganik():
     warga = mysql.connection.cursor()
-    warga.execute("SELECT * FROM uploadgambar WHERE jenis = 'anorganik'")
+    warga.execute("SELECT * FROM akumulasi WHERE jenis = 'anorganik'")
     data_warga = warga.fetchall()
     warga.close()
-    return render_template('admin/anorganik.html', uploadgambar=data_warga,anorganik=True)
+    return render_template('admin/anorganik.html', akumulasi=data_warga,anorganik=True)
 @main.route('/admin/organik')
 @login_required
 def organik():
     warga = mysql.connection.cursor()
-    warga.execute("SELECT * FROM uploadgambar WHERE jenis = 'organik'")
+    warga.execute("SELECT * FROM akumulasi WHERE jenis = 'organik'")
     data_warga = warga.fetchall()
     warga.close()
-    return render_template('admin/organik.html', uploadgambar=data_warga,organik=True)
+    return render_template('admin/organik.html', akumulasi=data_warga,organik=True)
 @main.route('/admin/b3')
 @login_required
 def b3():
     warga = mysql.connection.cursor()
-    warga.execute("SELECT * FROM uploadgambar WHERE jenis = 'b3'")
+    warga.execute("SELECT * FROM akumulasi WHERE jenis = 'b3'")
     data_warga = warga.fetchall()
     warga.close()
-    return render_template('admin/b3.html', uploadgambar=data_warga,b3=True)
-@main.route('/admin/latih_chatbot')
+    return render_template('admin/b3.html', akumulasi=data_warga,b3=True)
+@main.route('/admin/latih_chatbot',methods=['GET','POST'])
 @login_required
 def latih_chatbot():
-    filename = 'application/content.json'
-    with open(filename, 'r') as f:
-        data = json.load(f)
-        data['id'] = 134 # <--- add `id` value.
-
-        os.remove(filename)
-    with open(filename, 'w') as f:
-        json.dump(data, f, indent=4)
-    return jsonify(intents)
+    if request.method == 'GET':
+        #cetak isi json
+        tag=[]
+        for i in range(len(intents['intents'])):
+            tag.append=(f"Tag: {intents['intents'][i]['tag']}")
+            tag.append=("Parameter:")
+            for j in range(len(intents['intents'][i]['patterns'])):
+                print(f"- {intents['intents'][i]['patterns'][j]}")
+            print("Respon:")
+            print(f"- {intents['intents'][i]['responses']}")
+        return render_template('list')
+    elif request.method == 'POST':
+        #edit&save json
+        data = request.json
+        return jsonify(data)
 @main.route('/admin/listadmin')
 @login_required
 def listadmin():
-    user = User.query().fetchall()
-    warga = mysql.connection.cursor()
-    warga.execute("SELECT * FROM data_warga")
-    data_warga = warga.fetchall()
-    warga.close()
-    return render_template('admin/listadmin.html', data_warga=data_warga,listadmin=True)
+    return render_template('admin/listadmin.html', admin = User.query.all().fetchall(),listadmin=True)
 
 @main.route('/chatbot')
+@login_required
 def chatbot():
     return render_template('admin/chatbot.html')
 def clean_up_sentence(sentence):
@@ -269,44 +180,14 @@ def chatbot_response(msg):
     res = getResponse(ints, intents)
     return res
 @main.route("/get")
+@login_required
 def get_bot_response():
     userText = request.args.get('msg')
     return chatbot_response(userText)
-@main.route('/getname/<username>', methods=['POST'])
-def extract_name(username):
-    warga = mysql.connection.cursor()
-    password = request.form['password']
-    warga.execute("SELECT email FROM data_warga WHERE email= %s AND password = %s" , (username, password,))
-    masuk = warga.fetchall()
-    return "halo"+str(masuk)
-@main.route('/getsampah', methods=['POST'])
-def sampah(username):
-    warga = mysql.connection.cursor()
-    warga.execute("SELECT * FROM uploadgambar WHERE user = " , (username,))
-    masuk = warga.fetchall()
-    return render_template('user.html',data_warga=masuk)
-@main.route('/reguser/<username>', methods=['POST'])
-def reguser(username):
-    warga = mysql.connection.cursor()
-    nama = request.form['nama']
-    email = request.form['email']
-    password = request.form['password']
-    
-    no_rumah = request.form['no_rumah']
-    kontak = request.form['kontak']
-    warga.execute("INSERT INTO data_warga (nama,email,password,no_rumah,kontak) values (%s,%s,%s,%s,%s)",(nama,email,password,no_rumah,kontak,))
-    mysql.connection.commit()
-    return "halo"+str(nama)
-
-@main.route('/tambahgambar/<gambar>', methods=['POST'])
-def tambahgambar(gambar):
-    warga = mysql.connection.cursor()
-    warga.execute("INSERT INTO tambahgambar (gambar) values (%s)",(gambar,))
-    mysql.connection.commit()
-    return 'berhasil menambah data'
 @main.route('/history/<username>', methods=['POST'])
+@login_required
 def historyuser(username):
     warga = mysql.connection.cursor()
-    warga.execute("SELECT * FROM uploadgambar WHERE user = %s " , (username,))
+    warga.execute("SELECT jenis,count(gambar),user FROM akumulasi WHERE user = %s GROUP BY jenis" , (username,))
     history = warga.fetchall()
-    return "halo"+str(history)
+    return render_template('history.html',history)

@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Form</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+<body>
+    <div id="data"></div>
+    <input type="text" id="textField" />
+    <button id="demo_btn">Dummy button</button>
+    <script>
+        $(document).ready(function () {
+            $("#demo_btn").on("click", function() {
+                var text = $('#textField').val();
+                var obj = {name:text};
+                var myJSON = JSON.stringify(obj);
+                $.ajax({                        
+                    url: '/process',
+                    type : 'post',
+                    contentType: 'application/json',
+                    dataType : 'json',
+                    data : myJSON
+                }).done(function(result) {
+                    $("#data").html(result["name"]);
+                }).fail(function(jqXHR, textStatus, errorThrown) {
+                    console.log("fail: ",textStatus, errorThrown);
+                });
+            });
+        });
+    </script>       
+</body>
+</html>

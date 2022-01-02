@@ -1,7 +1,5 @@
-
-
+{% if not current_user.is_authenticated %}
 {% extends "base.html" %}
-
 {% block content %}
 
 <!-- <h1 class="ok">
@@ -9,3 +7,10 @@
 </h1> -->
 
 {% endblock %}
+{% endif %}
+{% if current_user.is_authenticated %}
+anda sudah login<br>
+silahkan kembali ke dashboard<br>
+<a href="{{url_for('main.dashboard')}}"><button>Dashboard</button></a>
+
+{% endif %}
