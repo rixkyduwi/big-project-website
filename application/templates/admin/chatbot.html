@@ -91,12 +91,12 @@
     function botResponse(rawText) {
 
       // Bot Response
-      $.get("/get", { msg: rawText }).done(function (data) {
+     $.get("/get", { msg: rawText }).done(function (data) {
         console.log(rawText);
         console.log(data);
         const msgText = data;
         appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
-
+ 
       });
 
     }

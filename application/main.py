@@ -26,7 +26,10 @@ def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 @main.route('/')
 def index():
-    return render_template('index.html')
+    if current_user.is_authenticated:
+        return redirect(url_for('main.dashboard'))
+    else:
+        return render_template('index.html')
 @main.route('/dashboard')
 @login_required
 def dashboard():
@@ -77,7 +80,7 @@ def atributuser(jenis):
     warga = mysql.connection.cursor()
     user = request.form['user']
     berat = request.form['berat(KG)']
-    warga.execute("INSERT INTO akumulasi (jenis,user,berat_KG) values (%s,%s,%s)",(jenis,user,int(berat),))
+    warga.execute("INSERT INTO akumulasi (jenis,user,berat) values (%s,%s,%s)",(jenis,user,(berat),))
     mysql.connection.commit()
     return "Hasil Scan Telah Disimpan"
 @main.route('/admin/anorganik')
@@ -88,35 +91,43 @@ def anorganik():
     data_warga = warga.fetchall()
     warga.close()
     return render_template('admin/anorganik.html', akumulasi=data_warga,anorganik=True)
-@main.route('/deleteanorganik/<id>')
+@main.route('/deletesampah/<id>', methods=['GET'])
 @login_required
-def deleteanorganik(id):
-    try:
-        if request.method == 'GET':
-            warga = mysql.connection.cursor()
-            warga.execute("DELETE FROM akumulasi where id = "+id)
-            mysql.connection.commit()
-    except Exception as e:
-        return make_response(e)
-    return redirect(url_for('main.anorganik'))
-@main.route('/formupdateanorganik/<id>', methods=['GET'])
+def deletesampah(id):
+    warga = mysql.connection.cursor()
+    warga.execute("SELECT jenis FROM akumulasi WHERE id = "+id)
+    jenis= warga.fetchone()
+    if str(jenis)=="('anorganik',)":
+        warga.execute("DELETE FROM akumulasi WHERE id = "+id)
+        mysql.connection.commit()
+        return redirect(url_for('main.anorganik'))
+    elif str(jenis)=="('organik',)":
+        warga.execute("DELETE FROM akumulasi WHERE id = "+id)
+        mysql.connection.commit()
+        return redirect(url_for('main.organik'))
+    elif str(jenis)=="('b3',)":
+        warga.execute("DELETE FROM akumulasi WHERE id = "+id)
+        mysql.connection.commit()
+        return redirect(url_for('main.b3'))
+    else :
+        return 'id tidak ada'
+@main.route('/formupdatesampah/<id>', methods=['GET'])
 @login_required
-def formupdateanorganik(id):
+def formupdatesampah(id):
     akumulasi = mysql.connection.cursor()
-    akumulasi.execute("SELECT * FROM  where id ="+id)
-    akumulasi = akumulasi.fetchall()
+    akumulasi.execute("SELECT * FROM akumulasi where id ="+id)
+    data_akumulasi = akumulasi.fetchall()
     akumulasi.close()
-    return render_template('admin/edit_akumulasi.html',data_warga=akumulasi)
-@main.route('/updateanorganik/<id>',methods=['POST'])
+    return render_template('admin/edit_akumulasi.html',data_warga=data_akumulasi)
+@main.route('/updatesampah/<id>',methods=['POST'])
 @login_required
-def updateanorganik(id):
+def updatesampah(id):
     akumulasi = mysql.connection.cursor()
-    nama = request.form['nama']
-    alamat = request.form['alamat']
-    kontak = request.form['kontak']
-    password = request.form['password']
-    email = request.form['email']
-    akumulasi.execute("UPDATE akumulasi SET id = "+id+",nama ='"+ nama+"',no_rumah = '" +alamat+"',kontak='"+ kontak+"',password = '"+password+"',email = '"+email+"' WHERE  id ="+id)
+    jenis = request.form['jenis']
+    gambar = request.form['gambar']
+    user = request.form['user']
+    berat = request.form['berat']
+    akumulasi.execute("UPDATE akumulasi SET jenis ='"+ jenis+"',gambar= '" +gambar+"',user='"+ user+"',berat = '"+berat+"' WHERE  id ="+id)
     mysql.connection.commit()
     akumulasi = akumulasi.fetchall()
     return redirect(url_for('main.anorganik',akumulasi=akumulasi))
@@ -182,7 +193,6 @@ def listadmin():
     return render_template('admin/listadmin.html', admin = User.query.all().fetchall(),listadmin=True)
 
 @main.route('/chatbot')
-@login_required
 def chatbot():
     return render_template('admin/chatbot.html')
 def clean_up_sentence(sentence):
@@ -234,7 +244,6 @@ def chatbot_response(msg):
     res = getResponse(ints, intents)
     return res
 @main.route("/get")
-@login_required
 def get_bot_response():
     userText = request.args.get('msg')
     return chatbot_response(userText)
