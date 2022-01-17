@@ -24,12 +24,12 @@
         <center><h2>Edit Info</h2></center>
         <form action="/updatesampah/{{data_warga[0].0}}" method="POST">
             <div align="center">
-                <span class="forspan">jenis</span>
-                <span><input id="nama"type="text" name="jenis"value="{{data_warga[0].1}}"></span>    
+                <span class="forspan">tanggal</span>
+                <span><input id="nama"type="date" name="tanggal"value="{{data_warga[0].1}}"></span>    
             </div>
             <div align="center">
-                <span class="forspan">gambar</span>
-                <span><input id="alamat"type="text" name="gambar"value="{{data_warga[0].2}}"></span>    
+                <span class="forspan">jenis</span>
+                <span><input id="alamat"type="text" name="jenis"value="{{data_warga[0].2}}"></span>    
             </div>
             <div align="center">
                 <span class="forspan">user</span>
@@ -37,8 +37,8 @@
             </div>            
             <div align="center">
                 <span class="forspan" aria-hidden="true">berat sampah</span>
-                <span><input id="password"type="text" name="berat" value="{{data_warga[0].4}}"></span>    
-            </div>          
+                <span><input id="password"type="number" name="berat" value="{{data_warga[0].4}}"></span>    
+            </div>        
             <div align="center">
                 <input type="submit" class="mybutton" name="savedata" value="Simpan">
             </div>

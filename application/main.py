@@ -4,6 +4,9 @@ from application import db,app,mysql
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, current_user
 from application.models import User
+import datetime
+
+
 #chatbot
 import nltk,pickle,json,random;nltk.download('popular')
 from nltk.stem import WordNetLemmatizer
@@ -75,12 +78,51 @@ def updateuser(id):
     mysql.connection.commit()
     data_warga = warga.fetchall()
     return redirect(url_for('main.warga',data_warga=data_warga))
+@main.route('/admin/admin')
+@login_required
+def admin():
+    users = User.query.all()
+    return render_template('admin/listadmin.html',data_admin=users)
+@main.route('/deleteadmin/<id>')
+@login_required
+def deleteadmin(id):
+    try:
+        if request.method == 'GET':
+            warga = mysql.connection.cursor()
+            warga.execute("DELETE FROM data_warga where id = "+id)
+            mysql.connection.commit()
+    except Exception as e:
+        return make_response(e)
+    return redirect(url_for('main.warga'))
+@main.route('/formupdateadmin/<id>', methods=['GET'])
+@login_required
+def formupdateadmin(id):
+    warga = mysql.connection.cursor()
+    warga.execute("SELECT * FROM data_warga where id ="+id)
+    data_warga = warga.fetchall()
+    warga.close()
+    print(data_warga)
+    return render_template('admin/edit_warga.html',data_warga=data_warga)
+@main.route('/updateadmin/<id>',methods=['POST'])
+@login_required
+def updateadmin(id):
+    warga = mysql.connection.cursor()
+    nama = request.form['nama']
+    alamat = request.form['alamat']
+    kontak = request.form['kontak']
+    password = request.form['password']
+    email = request.form['email']
+    warga.execute("UPDATE data_warga SET id = "+id+",nama ='"+ nama+"',no_rumah = '" +alamat+"',kontak='"+ kontak+"',password = '"+password+"',email = '"+email+"' WHERE  id ="+id)
+    mysql.connection.commit()
+    data_warga = warga.fetchall()
+    return redirect(url_for('main.warga',data_warga=data_warga))
 @main.route('/atributuser/<jenis>',methods=['POST'])
 def atributuser(jenis):
     warga = mysql.connection.cursor()
     user = request.form['user']
     berat = request.form['berat(KG)']
-    warga.execute("INSERT INTO akumulasi (jenis,user,berat) values (%s,%s,%s)",(jenis,user,(berat),))
+    gram = "gram"
+    warga.execute("INSERT INTO akumulasi (jenis,user,berat,satuan) values (%s,%s,%s,%s)",(jenis,user,berat,gram,))
     mysql.connection.commit()
     return "Hasil Scan Telah Disimpan"
 @main.route('/admin/anorganik')
@@ -124,10 +166,11 @@ def formupdatesampah(id):
 def updatesampah(id):
     akumulasi = mysql.connection.cursor()
     jenis = request.form['jenis']
-    gambar = request.form['gambar']
+    tanggal = request.form['tanggal']
     user = request.form['user']
     berat = request.form['berat']
-    akumulasi.execute("UPDATE akumulasi SET jenis ='"+ jenis+"',gambar= '" +gambar+"',user='"+ user+"',berat = '"+berat+"' WHERE  id ="+id)
+    satuan = request.form['satuan']
+    akumulasi.execute("UPDATE akumulasi SET jenis ='"+ jenis+"',timestap= '" +tanggal+"',user='"+ user+"',berat = '"+berat+"',satuan = '"+satuan+"' WHERE  id ="+id)
     mysql.connection.commit()
     akumulasi = akumulasi.fetchall()
     return redirect(url_for('main.anorganik',akumulasi=akumulasi))
@@ -172,21 +215,7 @@ def deleteb3(id):
 @main.route('/admin/latih_chatbot',methods=['GET','POST'])
 @login_required
 def latih_chatbot():
-    if request.method == 'GET':
-        #cetak isi json
-        tag=[]
-        for i in range(len(intents['intents'])):
-            tag.append=(f"Tag: {intents['intents'][i]['tag']}")
-            tag.append=("Parameter:")
-            for j in range(len(intents['intents'][i]['patterns'])):
-                print(f"- {intents['intents'][i]['patterns'][j]}")
-            print("Respon:")
-            print(f"- {intents['intents'][i]['responses']}")
-        return render_template('list')
-    elif request.method == 'POST':
-        #edit&save json
-        data = request.json
-        return jsonify(data)
+    return jsonify(intents)
 @main.route('/admin/listadmin')
 @login_required
 def listadmin():
@@ -242,15 +271,16 @@ def getResponse(ints, intents_json):
 def chatbot_response(msg):
     ints = predict_class(msg, model)
     res = getResponse(ints, intents)
-    return res
+    return res 
 @main.route("/get")
 def get_bot_response():
     userText = request.args.get('msg')
     return chatbot_response(userText)
-@main.route('/history/<username>', methods=['POST'])
-@login_required
-def historyuser(username):
+@main.route('/history/<username>', methods=['GET'])
+def historyuser_post(username):
     warga = mysql.connection.cursor()
-    warga.execute("SELECT jenis,count(gambar),user FROM akumulasi WHERE user = %s GROUP BY jenis" , (username,))
+    warga.execute("SELECT timestap,jenis,count(berat) as jumlah,user FROM akumulasi WHERE user = %s GROUP BY jenis" , (username,))
     history = warga.fetchall()
-    return render_template('history.html',history)
+    warga.execute("SELECT timestap, jenis,SUM(berat)/1000 as akumulasi,user FROM akumulasi WHERE user = %s GROUP BY jenis" , (username,))
+    berat = warga.fetchall()
+    return render_template('history.html',history=history,berat=berat)

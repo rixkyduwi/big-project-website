@@ -8,16 +8,10 @@ from application import db,mysql,login_manager
 auth = Blueprint('auth', __name__)
 @auth.route('/login')
 def login():
-     if 'loggedin' in session:
-
-        if session.get('role')=='faculty':
-            if request.method == 'POST':
-                global courseid
-                courseid = request.form['courseid']
-
-                return render_template('index.html')
-        else:
-            return 'only faculty can take attendance'
+    if current_user.is_authenticated:
+        return redirect(url_for('main.dashboard'))
+    else:
+        return render_template('login.html')
 @auth.route('/login', methods=['PUT','POST'])
 def login_post():
     #digunakan untuk login user db mysql

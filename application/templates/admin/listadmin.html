@@ -1,3 +1,4 @@
+{% include 'admin/nav.html' %}
 {% block content %}
 <div class="container">
     <div class="starter-template">
@@ -13,12 +14,12 @@
                 </tr>
             </thead>
             <tbody>
-                {% for row in admin %}
+                {% for row in data_admin %}
                 <tr>
-                    <td>{{ row.0 }}</td>
-                    <td>{{ row.1 }}</td>
-                    <td>{{ row.2 }}</td>
-                    <td>{{ row.3 }}</td>
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.email }}</td>
+                    <td>{{ row.name }}</td>
+                    <td>{{ row.password }}</td>
                     <td><button onclick="alert('pilihan sukses!')">edit</button><button onclick="alert('pilihan sukses!')">delete</button></td>
                 </tr>
                 {% else %}

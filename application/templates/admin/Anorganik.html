@@ -6,10 +6,11 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <td>tanggal</td>
                     <td>jenis</td>
-                    <td>gambar</td>
-                    <td>user</td>
+                    <td>email</td>
                     <td>berat sampah</td>
+                    <td>satuan</td>
                     <td>aksi</td>
                 </tr>
             </thead>
@@ -20,6 +21,7 @@
                     <td>{{ row.2 }}</td>
                     <td>{{ row.3 }}</td>
                     <td>{{ row.4 }}</td>
+                    <td>{{ row.5 }}</td>
                     <td><a href="/formupdatesampah/{{ row.0 }}"><button>Edit</button></a>
                         <a href="/deletesampah/{{ row.0 }}"><button>Hapus</button></a>
                     </td>
