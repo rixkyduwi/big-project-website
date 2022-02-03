@@ -12,7 +12,6 @@ import nltk,pickle,json,random;nltk.download('popular')
 from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 import numpy as np
-from json_modify import apply_actions
 from keras.models import load_model
 model = load_model('model.h5')
 intents = json.loads(open('application/content.json').read())
