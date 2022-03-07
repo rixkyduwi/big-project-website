@@ -25,7 +25,7 @@ db.init_app(app)
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 login_manager.init_app(app)
-login_manager.login_message = u"Bonvolu ensaluti por uzi tiun paĝon."
+login_manager.login_message = u"selamat datang"
 login_manager.login_message_category = "info"
 from application.models import User
 
