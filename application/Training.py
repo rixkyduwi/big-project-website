@@ -4,9 +4,6 @@ lemmatizer = WordNetLemmatizer()
 import json
 import pickle
 import numpy as np
-from keras.models import Sequential
-from keras.layers import Dense, Activation, Dropout
-from tensorflow.keras.optimizers import SGD
 import random
 
 words=[]
@@ -82,3 +79,5 @@ model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy
 hist = model.fit(np.array(train_x), np.array(train_y), epochs=100, batch_size=5, verbose=1)
 model.save('model.h5', hist)
 print("model created")
+ 
+ 
