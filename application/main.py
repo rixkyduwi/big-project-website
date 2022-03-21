@@ -6,7 +6,6 @@ from flask_login import login_required, current_user
 from application.models import User
 import datetime
 
-
 #chatbot
 import nltk,pickle,json,random;nltk.download('popular')
 from nltk.stem import WordNetLemmatizer
