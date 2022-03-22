@@ -1,4 +1,3 @@
-from application import app
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
@@ -11,6 +10,6 @@ main = Flask(__name__)
 @main.route('/')
 def index():
     return "halloworld"
-    
+
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    main.run(host="0.0.0.0", port=5000, debug=True)
