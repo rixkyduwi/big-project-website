@@ -9,10 +9,10 @@ UPLOAD_FOLDER = 'application/static/upload/'
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key-goes-here'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
-app.config['MYSQL_HOST'] = 'us-cdbr-east-05.cleardb.net'
-app.config['MYSQL_USER'] = 'bccc1e5d68a972'
-app.config['MYSQL_PASSWORD'] = '1171dc99'
-app.config['MYSQL_DB'] = 'heroku_068afdbbc88db22'
+app.config['MYSQL_DATABASE_HOST']= 'us-cdbr-east-05.cleardb.net'
+app.config['MYSQL_DATABASE_USER'] = 'bccc1e5d68a972'
+app.config['MYSQL_DATABASE_PASSWORD']  = '1171dc99'
+app.config['MYSQL_DATABASE_DB'] = 'heroku_068afdbbc88db22'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.config.update(dict(
