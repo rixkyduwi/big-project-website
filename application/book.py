@@ -26,7 +26,7 @@ def index():
 @app.route("/dashboard", methods=["GET"])
 def dashboard():
     books = Book.query.all()
-    return render_template("home.html", books=books)
+    return render_template("admin/home.html", books=books)
 
 @app.route("/books/create", methods=["POST"])
 def create():
@@ -40,7 +40,7 @@ def create():
 def edit(title):
     book = Book.query.filter_by(title=title).first()
     books = Book.query.all()
-    return render_template("edit.html", book=book, books=books)
+    return render_template("admin/edit.html", book=book, books=books)
 
 @app.route("/books/update", methods=["POST"])
 def update():
