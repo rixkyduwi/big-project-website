@@ -1,3 +1,3 @@
-FLASK_APP=main.py
+FLASK_APP=app.py
 FLASK_HOST="0.0.0.0"
 FLASK_PORT=5000
