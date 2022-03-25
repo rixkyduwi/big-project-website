@@ -1,6 +1,11 @@
 {% include 'admin/nav.html' %}
 {% block content %}
 <div class="container">
+    <h1>Add book</h1>
+    <form method="POST" action="/books/create">
+        <input type="text" name="title">
+        <input type="submit" value="Add">
+    </form>
     <div class="starter-template">
         <h1>Daftar Admin</h1>
         <table class="table table-striped">
@@ -14,22 +19,40 @@
                 </tr>
             </thead>
             <tbody>
-                {% for row in data_admin %}
-                <tr>
-                    <td>{{ row.id }}</td>
-                    <td>{{ row.email }}</td>
-                    <td>{{ row.name }}</td>
-                    <td>{{ row.password }}</td>
-                    <td><button onclick="alert('pilihan sukses!')">edit</button><button onclick="alert('pilihan sukses!')">delete</button></td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="2">Unbelievable. No entries here so far</td>
-                </tr>
-                {% endfor %}
+                {% for admin in data_admin %}
+            <tr>
+                <td>{{ admin.id }}</td>
+                <td>{{ admin.email }}</td>
+                <td>{{ admin.name }}</td>
+                <td>{{ admin.password }}</td>
+                <td><a href='/admin/{{ admin.id }}/edit'>Edit | </td></a>
+                <td><a onclick="confirm()" href='/admin/delete/{{admin.id}}'> Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
             </tbody>
         </table>
     </div>
 </div>
+<script >
+    function confirm(){
+        Swal.fire({
+  title: 'Apakah Anda Yakin?',
+  text: "Anda Tidak bisa mengulang ini!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire(
+      'Deleted!',
+      'Admin has been deleted.',
+      'success'
+    )
+  }
+})}
+</script>
 <!-- /.container -->
 {% endblock %}

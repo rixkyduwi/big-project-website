@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, current_user
 from application.models import User
 import datetime
-
+from application import models
 #chatbot
 import nltk,pickle,json,random;nltk.download('popular')
 from nltk.stem import WordNetLemmatizer
@@ -33,6 +33,41 @@ def index():
 @login_required
 def dashboard():
     return render_template('admin/index.html', name=current_user.name)
+
+
+@main.route("/admin/<id>/edit", methods=["GET"])
+@login_required
+def edit(tid):
+    admin = models.query.filter_by(id=id).first()
+    data_admin = models.query.all()
+    return render_template("admin/edit.html", admin=admin, data_admin=data_admin)
+
+@main.route("/admin/update", methods=["POST"])
+@login_required
+def update():
+    newname = request.form.get("newname")
+    oldname = request.form.get("oldname")
+    admin = models.query.filter_by(name=oldname).first()
+    admin.name = newname
+    newemail = request.form.get("newemail")
+    oldemail = request.form.get("oldemail")
+    admin = models.query.filter_by(email=oldemail).first()
+    admin.email = newemail
+    newpassword = request.form.get("newpassword")
+    oldpassword = request.form.get("oldpassword")
+    newpassword = generate_password_hash(newpassword, method='sha256')
+    admin = models.query.filter_by(password=oldpassword).first()
+    admin.password = newpassword
+    db.session.commit()
+    return redirect("/admin/admin")
+@main.route("/admin/delete", methods=["POST"])
+@login_required
+def delete():
+    id = request.form.get("id")
+    admin = models.query.filter_by(title=title).first()
+    db.session.delete(admin)
+    db.session.commit()
+    return redirect("/dashboard")
 @main.route('/admin/warga',methods=['GET'])
 @login_required
 def warga():
