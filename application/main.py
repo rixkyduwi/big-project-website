@@ -37,7 +37,7 @@ def dashboard():
 
 @main.route("/admin/<id>/edit", methods=["GET"])
 @login_required
-def edit(tid):
+def edit(id):
     admin = models.query.filter_by(id=id).first()
     data_admin = models.query.all()
     return render_template("admin/edit.html", admin=admin, data_admin=data_admin)
@@ -60,14 +60,19 @@ def update():
     admin.password = newpassword
     db.session.commit()
     return redirect("/admin/admin")
-@main.route("/admin/delete", methods=["POST"])
+@main.route("/admin/delete/<id>")
 @login_required
-def delete():
-    id = request.form.get("id")
-    admin = models.query.filter_by(title=title).first()
+def delete(id):
+    admin = User.query.filter_by(id=id).first()
     db.session.delete(admin)
     db.session.commit()
-    return redirect("/dashboard")
+    return redirect("/admin/admin")
+@main.route('/admin/admin')
+@login_required
+def admin():
+    users = User.query.all()
+    return render_template('admin/listadmin.html',data_admin=users)
+    
 @main.route('/admin/warga',methods=['GET'])
 @login_required
 def warga():
@@ -109,22 +114,7 @@ def updateuser(id):
     mysql.connection.commit()
     data_warga = warga.fetchall()
     return redirect(url_for('main.warga',data_warga=data_warga))
-@main.route('/admin/admin')
-@login_required
-def admin():
-    users = User.query.all()
-    return render_template('admin/listadmin.html',data_admin=users)
-@main.route('/deleteadmin/<id>')
-@login_required
-def deleteadmin(id):
-    try:
-        if request.method == 'GET':
-            warga = mysql.connection.cursor()
-            warga.execute("DELETE FROM data_warga where id = "+id)
-            mysql.connection.commit()
-    except Exception as e:
-        return make_response(e)
-    return redirect(url_for('main.warga'))
+
 @main.route('/formupdateadmin/<id>', methods=['GET'])
 @login_required
 def formupdateadmin(id):
