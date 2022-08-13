@@ -1,0 +1,144 @@
+{
+  "id": 134,
+  "intents": [
+    {
+      "context_set": "",
+      "patterns": [
+        "Hai ",
+        "Hello",
+        "Good",
+        "hallo"
+      ],
+      "responses": [
+        "Hai selamat datang Di aplikasi sampah Perkenalkan saya green apa ada yang bisa saya bantu....?"
+      ],
+      "tag": "error"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+        "Hai ",
+        "Hello",
+        "Good",
+        "hallo"
+      ],
+      "responses": [
+        "Hai selamat datang Di aplikasi sampah Perkenalkan saya green apa ada yang bisa saya bantu ?"
+      ],
+      "tag": "hai"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+        "aplikasi apa ini ?",
+        "aplikasi",
+        "sitem apa ini ?"
+      ],
+      "responses": [
+        "merupakan sebuah aplikasi yang digunakan untuk memberikan pengklasifikasin jenis sampah yakni sampah organik, anorganik dan B3"
+      ],
+      "tag": "Aplikasi"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+        "apa itu sampah ?",
+        "sampah",
+        "sampah adalah ",
+        "sampah yaitu "
+      ],
+      "responses": [
+        "Sampah adalah suatu bahan yang telah dibuang / tidak terpakai lagi oleh pemiliknya"
+      ],
+      "tag": "sampah"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+        "jenis sampah",
+        "apa saja jenis-jenis sampah?",
+        "jenis-jenis sampah ",
+        "apa saja jenis sampah"
+      ],
+      "responses": [
+        "jenis sampah ada 3 yaitu Organik,Anorganik dan B3 "
+      ],
+      "tag": "jenis sampah"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+        "apa itu sampah organik?",
+        "organik yaitu?",
+        "organik",
+        "apa itu organik?"
+      ],
+      "responses": [
+        "Organik adalah sampah yang berasal dari sisa mahkluk hidup yang mudah terurai secara alami tanpa proses campur tangan manusia untuk dapat terurai"
+      ],
+      "tag": "organik"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+        "apa itu sampah anorganik?",
+        "sampah anorganik?",
+        "anorganik?",
+        "apa sih anorganik?"
+      ],
+      "responses": [
+        "Sampah anorganik adalah sampah yang dihasilkan dari bahan-bahan non-hayati, baik berupa produk sintetik maupun hasil proses teknologi pengolahan bahan tambang"
+      ],
+      "tag": "anorganik"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+        "apa itu sampah B3?",
+        "sampah B3 ",
+        "B3",
+        "apa itu b3"
+      ],
+      "responses": [
+        "Merupakan singkatan dari Bahan Berbahaya dan Beracun atau sering disingkat dengan B3 adalah zat, energi, dan/atau komponen lain yang karena sifat, konsentrasi dan/atau jumlahnya baik secara langsung maupun tidak langsung dapat mencemarkan dan/atau merusak lingkungan hidup, membahayakan lingkungan hidup, kesehatan serta kelangsungan hidup manusia dan makhluk hidup lain."
+      ],
+      "tag": "B3"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+        "apa saja contoh dari sampah organik",
+        "contoh sampah oraganik",
+        "contoh organik"
+      ],
+      "responses": [
+        "Sisa masakan,Buah-buahan yang membusuk (termasuk kulitnya,Karton,kotoran hewan,sisa sayuran,daun-daun "
+      ],
+      "tag": "contoh organik"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+        "apa saja contoh dari sampah anorganik",
+        "contoh sampah anoraganik",
+        "contoh anorganik"
+      ],
+      "responses": [
+        "Kaleng aluminium,Styrofoam,Kertas kaca,Logam (sendok, peralatan masak, hiasan, dll.),Kemasan plastik,Kaca,Keramik. "
+      ],
+      "tag": "contoh anorganik"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+        "apa saja contoh dari sampah B3",
+        "contoh sampah B3",
+        "contoh B3"
+      ],
+      "responses": [
+        "Baterai Bekas,Neon dan Bohlam Bekas,Kaleng Aerosol Kosong "
+      ],
+      "tag": "contoh B3"
+    }
+  ]
+}

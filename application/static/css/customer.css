@@ -1,0 +1,84 @@
+.forspan {
+    text-align: left;
+    background-color: #d8bbff;
+    padding-right: 8px;
+    display: inline-block;
+    width: 122px;
+    height: 19px;
+    border-style: none;
+    padding: 8px 10px;
+    margin: 2px;
+    border-radius: 5px;
+}
+
+.mybutton {
+    border-style: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: #0353a4;
+    margin-top: 10px;
+    width: 2000px;
+    height: 40px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 10px;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+h1 {
+    float: left;
+    color: #1d3557;
+}
+
+img {
+    width: 80px;
+    height: 80px;
+    float: left;
+}
+
+.textandlogo {
+    display: inline-block;
+}
+
+.myaction {
+    border-style: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: #0353a4;
+    margin-top: 10px;
+    width: 100px;
+    height: 40px;
+    padding: 8px 10px;
+    font-size: small;
+}
+
+.mynew {
+    border-style: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: green;
+    margin-top: 10px;
+    width: 100px;
+    height: 40px;
+    padding: 8px 10px;
+}

@@ -1,0 +1,70 @@
+{% include 'admin/nav.html' %}
+{% block content %}
+<div class="container"style="margin-left:100px">
+    
+    <div class="starter-template">
+        <h1>Daftar Admin</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>No</td>
+                    <td>email</td>
+                    <td>username</td>
+                    <td>password</td>
+                    <td>aksi</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for admin in data_admin %}
+            <tr>
+                <td>{{ admin.id }}</td>
+                <td>{{ admin.email }}</td>
+                <td>{{ admin.name }}</td>
+                <td id="pswd"><input type="password" class="input is-large" disabled value="{{ admin.password }}"><button type="submit">lihat</button></td>
+                <td><a href='/admin/{{ admin.id }}/edit'>Edit |</a><a onclick="confirm()">
+                    
+                Delete</a>
+                <script>
+                    
+                    function confirm(){
+                            Swal.fire({
+                        title: 'Apakah Anda Yakin?',
+                        text: "Anda Tidak bisa mengulang ini!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete!'
+                        }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire(
+                            'Deleted!',
+                            'Admin has been deleted.',
+                            'success',
+                            $.ajax({
+                                type: 'DELETE',
+                                url: '/admin/delete/{{ admin.id }}',
+                                data: form_data,
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                success: function(data) {
+                                    window.location = "/admin/admin"
+                                }
+                                }),
+                            window.location = "/admin/admin"
+                            )
+                        }
+                        })}
+                        </script> 
+                    </td>
+            </tr>
+            
+{% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- /.container -->
+{% endblock %}

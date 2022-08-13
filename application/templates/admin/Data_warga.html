@@ -1,0 +1,42 @@
+{% include 'admin/nav.html' %}
+{% block content %}
+<div class="container" style="margin-left: 150px;margin-right: 20px;">
+    <div class="starter-template">
+        <h1>tampilan dari Database</h1>
+        <h1>Data Akumulasi Pembuangan Sampah Per rumah</h1>
+        <h2>Di Perumahan Palm Asri</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Nip</td>
+                    <td>nama</td>
+                    <td>nomor rumah</td>
+                    <td>kontak</td>
+                    <td>password</td>
+                    <td>email</td>
+                    <td>pilih</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data_warga %} 
+                <tr>
+                    <a href="/history/{{ row.4 }}"><td>{{ row.0 }}</td>
+                    <td>{{ row.1 }}</td>
+                    <td>{{ row.2 }}</td>
+                    <td>{{ row.3 }}</td>
+                    <td>{{ row.4 }}</td>
+                    <td>{{ row.5 }}</td></a>
+                    <td><a href="/formupdate/{{row.0}}">Edit</a> | <a href="/deleteuser/{{row.0}}">Hapus</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="2">Unbelievable. No entries here so far</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- /.container -->
+{% endblock %}

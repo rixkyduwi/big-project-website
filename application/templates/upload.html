@@ -1,0 +1,32 @@
+<!doctype html>
+<title>Python Flask File Upload Example</title>
+<h2>Select a file to upload</h2>
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+{% if filename %}
+	<div>
+		<img src="{{ url_for('main.display_image', filename=filename) }}">
+	</div>
+{% endif %}
+<form method="post" action="/uploadgambar" enctype="multipart/form-data">
+    <dl>
+		<p>
+            <input id="csrf_token" type="hidden" name="csrf_token" value="{{csrf_token()}}">
+            <input type="text" name="user" required>
+            <input type="text" name="jenissampah" required>
+			<input type="file" name="gambar" autocomplete="off" required>
+		</p>
+    </dl>
+    <p>
+		<input type="submit" value="Submit">
+	</p>
+</form>

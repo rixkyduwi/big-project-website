@@ -1,0 +1,37 @@
+{% include 'admin/nav.html' %}
+<div class="container" style="margin-left: 150px;margin-right: 20px;">
+    <div class="starter-template">
+        <h1>Data Akumulasi Pembuangan Sampah Anorganik Per rumah</h1>
+        <h2>Di Perumahan Palm Asri</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>tanggal</td>
+                    <td>jenis</td>
+                    <td>email</td>
+                    <td>berat sampah (KG)</td>
+                    <td>satuan</td>
+                    <td>aksi</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in akumulasi %}
+                <tr>
+                    <td>{{ row.1 }}</td>
+                    <td>{{ row.2 }}</td>
+                    <td>{{ row.3 }}</td>
+                    <td>{{ row.4 }}</td>
+                    <td>{{ row.5 }}</td>
+                    <td><a href="/formupdatesampah/{{ row.0 }}"><button>Edit</button></a>
+                        <a href="/deletesampah/{{ row.0 }}"><button>Hapus</button></a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="2">Unbelievable. No entries here so far</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

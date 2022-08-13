@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <link rel="stylesheet" href="../../static/css/header.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard</title>
+        <link rel="stylesheet" href="../../static/css/admin.css">
+        <link rel="stylesheet" href="../../static/css/title.css">
+        <style>
+            .link_name {
+        font-size: 14px;
+    }
+        .main-admin {
+            padding-left: 20%;
+        }
+    
+        .cards {
+            grid-column: 2 / span 12;
+            display: grid;
+            grid-template-columns: repeat(12, minmax(auto, 25px));
+            grid-gap: 40px;
+        }
+    
+        .card__image-container {
+            width: 100%;
+            padding-top: 100%;
+            overflow: hidden;
+            position: relative;
+            border-radius: 15px 15px 0px 0px;
+        }
+    
+        .text--medium {
+            font-size: 14px;
+            font-weight: 500;
+            padding-bottom: 1em;
+        }
+        </style>
+    </head>
+    
+    <body>
+        {% include 'admin/nav.html' %}
+        <main class="main-admin" style="margin-top:-2em;margin-left:1em">
+            <section class="cards" id="exp">
+                <div class="card">
+                    <a href="{{url_for('main.organik')}}" >
+                    <div class="card__image-container" >
+                            <img src="../../static/images/organik.png"
+                                alt="Detailed image description would go here."style="height: 226px;" />
+                    </div>
+                    <div class="card__content d-flex" style="justify-content: space-between;align-items: center">
+                        <p class="card__title text--medium">
+                            akumulasi Sampah organik
+                        </p>
+                    </div>
+                </a>
+                </div>
+                <div class="card">
+                    <a href="{{url_for('main.anorganik')}}">
+                    <div class="card__image-container">
+                            <img style="height: 226px;" src="../../static/images/an.png" alt="Detailed image description would go here." />
+                    </div>
+                    <div class="card__content d-flex" style="justify-content: space-between;align-items: center">
+                        <p class="card__title text--medium">
+                            akumulasi sampah anorganik
+                        </p>
+                    </div>
+                </a>
+                </div>
+                <div class="card">
+                    <a href="{{url_for('main.b3')}}">
+                    <div class="card__image-container">
+                            <img style="height: 226px;" src="../../static/images/b3.png" alt="Detailed image description would go here." />
+                        
+                    </div>
+                    <div class="card__content d-flex" style="justify-content: space-between;align-items: center">
+                        <p class="card__title text--medium">
+                            akumulasi sampah b3
+                        </p>
+                    </div>
+                </a>
+                </div>
+                <div class="card">
+                    <a href="{{url_for('main.warga')}}">
+                    <div class="card__image-container">
+                       
+                            <img style="height: 226px;"  src="../../static/images/warga.png" alt="Detailed image description would go here." />
+                        
+                    </div>
+                    <div class="card__content d-flex" style="justify-content: space-between;align-items: center">
+                        <p class="card__title text--medium">
+                            Data Warga
+                        </p>
+                    </div>
+                </a>
+                </div>
+                <div class="card">
+                    <a href="https://drive.google.com/drive/folders/1cdZiSSnoWV4FbJHEhqTE_fId1kNU6U_s?usp=sharing">
+                    
+                    <div class="card__image-container">
+                            <img style="height: 226px;" src="../../static/images/sampah.png" alt="Detailed image description would go here." />
+                       
+                    </div>
+                    <div class="card__content d-flex" style="justify-content: space-between;align-items: center">
+                        <p class="card__title text--medium">
+                            Latih Image Detector <br>
+                            tambahkan dataset agar akurasi semakin tinggi</p>
+                    </div>
+                </a>
+                </div>
+               
+                
+            </section>
+        </main>

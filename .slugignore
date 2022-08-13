@@ -1,0 +1,10 @@
+/app/application/static/
+/app/application/__pycache__/
+/app/application/
+/app/big_project.sql
+/app/heroku.sql
+/app/Pembagian Tugas Tiap Divisi.pdf
+/app/.heroku
+/app/qa.py
+/app/requirements.txt
+/app/wow.txt

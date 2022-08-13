@@ -1,0 +1,37 @@
+<html>
+  <body>
+    <h1>Edit admin</h1>
+    <form method="PUT" action="/admin/update" style="display: inline">
+      <p>nama: {{admin.name}}</p>
+      <input type="hidden" value="{{admin.name}}" name="oldtitle">
+      <input type="text" value="{{admin.name}}" name="newtitle">
+      <input type="submit" value="Update">
+      <p>email: {{admin.email}}</p>
+      <input type="hidden" value="{{admin.email}}" name="oldemail">
+      <input type="text" value="{{admin.email}}" name="newemail">
+      <input type="submit" value="Update">
+      <p>password: {{admin.password}}</p>
+      <input type="hidden" value="{{admin.password}}" name="oldpassword">
+      <input type="text" value="{{admin.password}}" name="newpassword">
+      <input type="submit" value="Update">
+    </form>
+    <form method="POST" action="/books/delete" style="display: inline">
+      <input type="hidden" value="{{admin.id}}}" name="title">
+      <input type="submit" value="Delete">
+    </form>
+
+    <h1>admin</h1>
+    <table>
+        <tr>
+            <th>Title</th>
+        </tr>
+        {% for admin in data_admin %}
+            <tr><td>{{ admin.name }}</td>
+                <td><a href='/books/{{ admin.name }}/edit' />Edit</td>
+                <td><a href='/books/{{ admin.email }}/edit' />Edit</td>
+                <td><a href='/books/{{ admin.password }}/edit' />Edit</td>
+            </tr>
+        {% endfor %}
+    </table>
+  </body>
+</html>

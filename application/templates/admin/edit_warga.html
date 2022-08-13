@@ -1,0 +1,88 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://cdn.ckeditor.com/4.6.2/standard-all/ckeditor.js"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/info.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/customer.css') }}">
+    <title>Edit Info</title>
+    <style>
+        #password, #id,#alamat,#kontak,#email,#nama {
+            width: 200px;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        input[type="submit"] {
+            padding: 5px;
+            width: 80px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <center><h2>Edit Info</h2></center>
+        <form action="/updateuser/{{data_warga[0].0}}" method="POST">
+            <div align="center">
+                <span class="forspan">Your ID</span>
+                <span><input id="id" type="number" name="myid" value="{{ data_warga[0].0 }}"></span>
+            </div>
+            <div align="center">
+                <span class="forspan">Fullname</span>
+                <span><input id="nama"type="text" name="nama"value="{{data_warga[0].1}}"></span>    
+            </div>
+            <div align="center">
+                <span class="forspan">Address</span>
+                <span><input id="alamat"type="text" name="alamat"value="{{data_warga[0].2}}"></span>    
+            </div>
+            <div align="center">
+                <span class="forspan">Phone</span>
+                <span><input id="kontak"type="text"input='number' name="kontak" value="{{data_warga[0].3}}"></span>    
+            </div>            
+            <div align="center">
+                <span class="forspan" aria-hidden="true">Password</span>
+                <span><input id="password"type="password" name="password" value="{{data_warga[0].4}}"></span>    
+            </div> 
+            <div align="center">
+                <span class="forspan" aria-hidden="true">Email</span>
+                <span><input id="email"type="email" name="email"value="{{data_warga[0].5}}"></span>
+            </div>            
+            <div align="center">
+                <input type="submit" class="mybutton" name="savedata" value="Simpan">
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+(function() {
+    var showHide = function( element, field ) {
+        this.element = element;
+        this.field = field;
+        
+        this.toggle();    
+    };
+    
+    showHide.prototype = {
+        toggle: function() {
+            var self = this;
+            self.element.addEventListener( "change", function() {
+                if(self.element.checked) {self.field.setAttribute( "type", "text" );}
+                else {self.field.setAttribute( "type", "password" );}
+            }, false);
+        }
+    };
+    
+    document.addEventListener( "DOMContentLoaded", function() {
+        var checkbox = document.querySelector( "#show-hide" ),
+            password = document.querySelector( "#password" ),
+            form = document.querySelector( "#form" );
+            
+            form.addEventListener( "submit", function( e ) {
+                e.preventDefault();
+            }, false);
+            
+            var toggler = new showHide( checkbox, password );
+    });
+    
+})();
+</script>

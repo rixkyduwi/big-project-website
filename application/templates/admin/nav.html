@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <link rel="stylesheet" href="../../static/css/header.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+    .link_name {
+        font-size: 14px;
+    }
+    table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+    td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    }
+
+    tr:nth-child(even) {
+    background-color: #dddddd;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar close">
+        <div class="logo-details">
+            <i style="cursor:pointer;" class='bx bx-menu'></i>
+            <span class="logo_name" style="font-size:14px">~
+                Welcome, {{ name }}!
+              </span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="{{url_for('main.dashboard')}}">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="link_name" style="font-size:16px;">Dashboard</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="{{url_for('main.dashboard')}}">Dashboard</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="{{url_for('main.anorganik')}}">
+                        <i class='bx bx-collection'></i>
+                        <span class="link_name" style="font-size:16px;">Anorganik</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">akumulasi sampah</a></li>
+                    <li><a href="{{url_for('main.anorganik')}}">anorganik</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="{{url_for('main.organik')}}">
+                        <i class='bx bx-collection'></i>
+                        <span class="link_name" style="font-size:16px;">organik</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">akumulasi sampah</a></li>
+                    <li><a href="{{url_for('main.organik')}}">organik</a>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-collection'></i>
+                        <span class="link_name" style="font-size:16px;">b3</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">akumulasi sampah</a></li>
+                    <li><a href="{{url_for('main.b3')}}">b3(Bahan Berbahaya dan Beracun)</a>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-collection'></i>
+                        <span class="link_name" style="font-size:16px;">Data Warga</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Data Warga</a></li>
+                    <li><a href="{{url_for('main.warga')}}">Data Warga</a>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-collection'></i>
+                        <span class="link_name" style="font-size:16px;">Latih Mesin</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Latih Mesin</a></li>
+                    <li><a href="https://drive.google.com/drive/folders/1cdZiSSnoWV4FbJHEhqTE_fId1kNU6U_s?usp=sharing">deteksi sampah</a>
+                    
+                </ul>
+            </li>
+            
+            <li>
+                <a href="{{url_for('main.admin')}}">
+                    <i class='bx bx-user-circle'></i>
+                    <span class="link_name" style="font-size:16px;">Daftar Admin</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="{{url_for('main.admin')}}" style="font-size:16px;">Daftar Admin</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="{{url_for('auth.logout')}}">
+                    <i class='bx bx-exit'></i>
+                    <span class="link_name">Logout</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="{{url_for('auth.logout')}}">Logout</a></li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+    <script>
+    let arrow = document.querySelectorAll(".arrow");
+    for (var i = 0; i < arrow.length; i++) {
+        arrow[i].addEventListener("click", (e) => {
+            let arrowParent = e.target.parentElement.parentElement; 
+            arrowParent.classList.toggle("showMenu");
+        });
+    }
+
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".bx-menu");
+    console.log(sidebarBtn);
+    sidebarBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+    });
+    </script>
+
+</body>
+
+</html>

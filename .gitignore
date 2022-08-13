@@ -1,0 +1,10 @@
+auth/
+__pycache__/
+cv_api/
+web/
+project/
+venv/
+env/
+Absensi2/
+uas_smt5/
+application/__pycache__/
