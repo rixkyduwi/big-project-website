@@ -10,20 +10,7 @@
         "hallo"
       ],
       "responses": [
-        "Hai selamat datang Di aplikasi sampah Perkenalkan saya green apa ada yang bisa saya bantu....?"
-      ],
-      "tag": "error"
-    },
-    {
-      "context_set": "",
-      "patterns": [
-        "Hai ",
-        "Hello",
-        "Good",
-        "hallo"
-      ],
-      "responses": [
-        "Hai selamat datang Di aplikasi sampah Perkenalkan saya green apa ada yang bisa saya bantu ?"
+        "Hai selamat datang Di virtual tour tegal. saya adalah tour guide virtual anda 😉 apa ada yang bisa saya bantu ?"
       ],
       "tag": "hai"
     },
@@ -139,6 +126,119 @@
         "Baterai Bekas,Neon dan Bohlam Bekas,Kaleng Aerosol Kosong "
       ],
       "tag": "contoh B3"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+        "apa itu tempat wisata guci?",
+        "deskripsi guci",
+        "dimana guci?"
+      ],
+      "responses": [
+        "tempat wisata guci adalah pemaindian air panas yang dibuka untuk umum dengan tarif murah hanya 10rb/ orang yang berada di kaki Gunung Slamet. Alamat Wisata Guci Tegal berada di Desa Guci, Kecamatan Bumijawa, Kabupaten Tegal, maps => https://goo.gl/maps/vwfu2ZQDF4Z5QHrh8  "
+      ],
+      "tag": "guci"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+        "apa sejarah tempat wisata guci?",
+        "sejarah guci",
+        "apa saja sejarah guci?",
+        "bagaimana terbentuknya guci?",
+        "asal muasal guci",
+        "asal usul guci",
+        "apa nilai sejarah guci?"
+      ],
+      "responses": [
+        "Objek Wisata Guci bermula setelah ditemukannya sumber mata air (bahasa jawa: tuk) di Desa Guci dan diteliti tidak mengandung racun. Maka pada tahun 1974 pemandian air panas dibuka untuk umum dengan fasilitas yang masih alami dan belum dibuat seperti sekarang ini, wisatawan masih mandi di bawah gua sumber mata air panas yang konon tempat itu merupakan daerah kekuasaan dayang Nyai Roro Kidul yang bertugas di wilayah sungai sebelah utara Gunung Slamet atau lebih dikenal Kali Gung. Dinamakan Kali Gung sebab bersinggungan dengan mata air yang agung yakni aliran mata air panas yang melimpah sepanjang tahun, dayang Nyai Roro Kidul bernama Nyai Rantensari yang berwujud naga maka di Pancuran 13 tersebut dibuat Patung Naga untuk mengingatkan akan daya mistis yang ada dikawasan Objek Wisata Guci.",
+        "Di kawasan tersebut juga terdapat pohon beringin dan pohon karet yang sudah ratusan tahun yang konon ditanam oleh keturunan Kyai Klitik yang bernama Eyang Sudi Reja dan Mbah Abdurahim pada tahun 1918. Dengan maksud agar daerah tersebut tidak mudah longsor, kuat serta rindang. Sampai sekarang pemandian air panas Guci menyimpan misteri kegaibannya sebab merupakan peninggalan para wali terdahulu penyebar agama islam, dan masih banyak tempat – tempat yang menyimpan sejarah seperti petilasan Kyai Mustofa dan makamnya di Pekaringan berjarak 5 KM dar Desa Guci, Kyai Mustofa adalah seorang ulama keturunan kanjeng Sunan Gunungjati yang syiar Islam kemudian bertapa di Desa Guci pada zaman cucu Kyai Klitik.",
+        "Ulama inilah yang memberi nama air terjun di sebelah atas Pemandian Pancuran 13 yaitu Curug Serwiti sebab banyak muncul burung serwiti dan diatas curug itu ada lagi sebuah curug yang indah bernama Curug Jedor yang tidak pernah diketahui asal muasal nama tersebut."        
+      ],
+      "tag": "sejarah guci"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+        "mitos guci",
+        "legenda guci",
+        "apa saja mitos guci?",
+        "apa saja legenda guci?",
+        "apa saja mitos/legenda guci?"
+      ],
+      "responses": [
+        "Objek wisata ini biasanya ramai dikunjungi pada malam Jumat Kliwon. Banyak orang yang ngalap berkah. Konon, kalau mandi pada pukul 12 malam dengan memohon sesuatu, permohonan apapun akan dikabulkan. Kepercayaan ini sudah turun-temurun.",
+        "Diceritakan air panas Guci adalah air yang diberikan Walisongo kepada orang yang mereka utus untuk menyiarkan agama Islam ke Jawa Tengah bagian barat di sekitar Tegal. Karena air itu ditempatkan di sebuah guci (poci), dan berkhasiat mendatangkan berkat, masyarakat menyebut lokasi pemberian air itu dengan nama Guci. Tapi karena air pemberian wali itu sangat terbatas, pada malam Jumat Kliwon, salah seorang sunan menancapkan tongkat saktinya ke tanah. Atas izin Tuhan, mengalirlah air panas tanpa belerang yang penuh rahmat ini."
+      ],
+      "tag": "mitos / legenda guci"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+        "ada berapa spot wisata di guci?",
+        "wahana apa saja yang ada di guci?",
+        "spot apa saja yang ada di guci?"
+      ],
+      "responses": [
+        "spot wisata di guci ada 6 yaitu:",
+        "1. Guciku",
+        "2. Pancuran 13",
+        "3. Pancuran 5",
+        "4. Pemandian Tertutup",
+        "5. Baron Hill",
+        "6. Geong "      
+      ],
+      "tag": "spot guci"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+        "apa saja",
+        "",
+        ""
+      ],
+      "responses": [
+        " "
+      ],
+      "tag": "cempaka"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+        "",
+        "",
+        ""
+      ],
+      "responses": [
+        ""
+      ],
+      "tag": "kemadu"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+        "",
+        "",
+        ""
+      ],
+      "responses": [
+        ""
+      ],
+      "tag": "sawahbatu"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+        "",
+        "",
+        ""
+      ],
+      "responses": [
+        ""
+      ],
+      "tag": "sigedong"
     }
+
+
   ]
 }
