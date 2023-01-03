@@ -6,3 +6,6 @@ keras==2.8.0rc0
 nltk==3.7
 numpy==1.23.1
 Werkzeug==2.2.2
+tensorboard==2.8.0
+tensorflow-cpu==2.8.3
+tensorflow-estimator==2.8.0
