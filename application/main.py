@@ -2,7 +2,7 @@ from flask import Blueprint, render_template,request,redirect,url_for,jsonify,ma
 from application import db,mysql
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, current_user
-from application.bert import bert_prediction
+# from application.bert import bert_prediction
 from application.models import User
 from application import models
 #chatbot
