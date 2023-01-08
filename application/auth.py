@@ -2,8 +2,10 @@ from flask import Blueprint, render_template, redirect, url_for,request,flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required,current_user
 from application.models import User
+from flask_cors import CORS
 from application import db,mysql
 auth = Blueprint('auth', __name__)
+CORS(auth)
 # @auth.route('/login')
 # def login():
 #     if current_user.is_authenticated:

@@ -3,6 +3,8 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_mysqldb import MySQL 
 from . import settings
+from flask_cors import CORS
+
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
 mysql = MySQL()
@@ -39,7 +41,7 @@ app.register_blueprint(auth_blueprint)
 # blueprint for non-auth parts of app
 from application.main import main as main_blueprint
 app.register_blueprint(main_blueprint)
-
+CORS(app)
 # import os
 # import sys
 # import urllib.parse 

@@ -10,6 +10,19 @@
         "hallo"
       ],
       "responses": [
+        "maaf saya tidak bisa membantu terkait hal itu, ada hal lain yang bisa saya bantu?"
+      ],
+      "tag": "error"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+        "Hai ",
+        "Hello",
+        "Good",
+        "hallo"
+      ],
+      "responses": [
         "Hai selamat datang Di virtual tour tegal. saya adalah tour guide virtual anda 😉 apa ada yang bisa saya bantu ?"
       ],
       "tag": "hai"

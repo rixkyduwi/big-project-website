@@ -6,19 +6,23 @@ from flask_login import login_required, current_user
 from application.models import User
 from application import models
 #chatbot
+from flask_cors import CORS
 import nltk,pickle,json,random;#nltk.download('popular')
+nltk.download('punkt')
 from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 intents = json.loads(open('application/content.json').read())
-words = pickle.  load(open('texts.pkl','rb'))
+# words = pickle.load(open('texts.pkl','rb'))
 classes = pickle.load(open('labels.pkl','rb'))
 #upload gambar
+
 from werkzeug.utils import secure_filename
 import os,glob,urllib.request
 import numpy as np
 from keras.models import load_model
-model = load_model('model.h5')
+# model = load_model('model.h5')
 main = Blueprint('main', __name__)
+CORS(main)
 # ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 # img_list=glob.glob("/content/drive/MyDrive/dataset/anorganik/*.jpg")
 # def allowed_file(filename):
@@ -239,7 +243,8 @@ def index():
 #chatbot nlp
 @main.route('/chatbotnlp')
 def chatbot():
-    return render_template('admin/chatbotnlp.html')
+    a = "<h1>hello</h1>"
+    return render_template('admin/chatbotnlp.html', a=a)
 def clean_up_sentence(sentence):
     # tokenize the pattern - split words into array
     sentence_words = nltk.word_tokenize(sentence)
@@ -274,7 +279,9 @@ def predict_class(sentence, model):
     return return_list
 def getResponse(ints, intents_json):
     tag = ints[0]['intent']
+    print(tag)
     list_of_intents = intents_json['intents']
+    print(list_of_intents)
     for i in list_of_intents:
         if(i['tag']== tag):
             result = random.choice(i['responses'])
@@ -287,7 +294,8 @@ def chatbot_response(msg):
 @main.route("/get")
 def get_bot_response():
     userText = request.args.get('msg')
-    return chatbot_response(userText)
+    print(userText)
+    return chat(userText)
 @main.route('/history/<username>', methods=['GET'])
 def historyuser_post(username):
     warga = mysql.connection.cursor()
@@ -296,4 +304,58 @@ def historyuser_post(username):
     warga.execute("SELECT timestap, jenis,SUM(berat)/1000 as akumulasi,user FROM akumulasi WHERE user = %s GROUP BY jenis" , (username,))
     berat = warga.fetchall()
     return render_template('history.html',history=history,berat=berat)
-   
+from nltk.stem.lancaster import LancasterStemmer
+stemmer = LancasterStemmer()
+
+import numpy
+import tflearn
+import tensorflow
+import random
+import json
+import pickle
+
+try:
+  with open("data.pickle", "rb") as f:
+    words, labels, training, output = pickle.load(f)
+except:
+  words = []
+  labels = []
+  docs_x = []
+  docs_y = []
+
+data = json.loads(open('application/content.json').read())
+with open("data.pickle", "wb") as f:
+    pickle.dump((words, labels, training, output), f)
+net = tflearn.input_data(shape=[None, len(training[0])])
+net = tflearn.fully_connected(net, 8)
+net = tflearn.fully_connected(net, 8)
+net = tflearn.fully_connected(net, len(output[0]), activation="softmax")
+net = tflearn.regression(net)
+
+model = tflearn.DNN(net)
+model.load('model.tflearn')
+def bag_of_words(s, words):
+  bag = [0 for _ in range(len(words))]
+  print(bag)
+  s_words = nltk.word_tokenize(s)
+  s_words = [stemmer.stem(word.lower()) for word in s_words]
+
+  for se in s_words:
+    for i, w in enumerate(words):
+      if w == se:
+        bag[i] = 1
+
+  return numpy.array(bag)
+
+def chat(msg):
+    results = model.predict([bag_of_words(msg, words)])
+    results_index = numpy.argmax(results)
+    tag = labels[results_index]
+    # print(tag)
+    for tg in data["intents"]:
+      if tg['tag'] == tag:
+        responses = tg['responses']
+        return random.choice(responses)
+    print(tag)
+    print(random.choice(responses))
+    return random.choice(responses)
