@@ -10,7 +10,7 @@
         "hallo"
       ],
       "responses": [
-        "Hai selamat datang Di virtual tour tegal. saya adalah tour guide virtual anda 😉 apa ada yang bisa saya bantu ?"
+        "Hai selamat datang Di virtual tour tegal. saya adalah tour guide virtual anda. apa ada yang bisa saya bantu ?"
       ],
       "tag": "hai"
     },
@@ -274,6 +274,16 @@
         "2. Oemah Pinus"
       ],
       "tag": "spot sigedong"
+    },
+    {
+      "context_set": "",
+      "patterns": [
+          "apakah ini krusty crab?"
+        ],
+      "responses": [
+        "bukan petrick, ini ̶k̶e̶l̶p̶ ̶s̶h̶a̶k̶e̶  MIXUE"
+      ],
+      "tag": "random question"
     }
   ]
 }
