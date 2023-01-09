@@ -336,7 +336,6 @@ model = tflearn.DNN(net)
 model.load('model.tflearn')
 def bag_of_words(s, words):
   bag = [0 for _ in range(len(words))]
-  print(bag)
   s_words = nltk.word_tokenize(s)
   s_words = [stemmer.stem(word.lower()) for word in s_words]
 
@@ -351,7 +350,7 @@ def chat(msg):
     results = model.predict([bag_of_words(msg, words)])
     results_index = numpy.argmax(results)
     tag = labels[results_index]
-    # print(tag)
+    print(tag)
     for tg in data["intents"]:
       if tg['tag'] == tag:
         responses = tg['responses']
