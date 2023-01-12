@@ -14,5 +14,5 @@ untuk library model chatbot <br>
 ketik <code>pip install nltk pickle tensorflow numpy</code><br>
 atau bisa install semuanya dengan pip install -r requirements.txt<br>
 setelah semua sudah terinstal untuk menjalankanya <br>
-ketik <code>python main.py</code><br>
+ketik <code>python app.py</code><br>
 --selesai--
